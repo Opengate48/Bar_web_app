@@ -1,0 +1,19 @@
+<div id="personal-account">
+    <h3>{{userEmail}}</h3>
+    <form action="#" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button type="submit" class="logout-btn">Log Out</button>
+    </form>
+    <div class="grid-container">
+        {{#each reservedTables}}
+        <div class="card">
+            <img src="/images/{{image}}" alt="{{table}}">
+            <h3>{{table}}</h3>
+            <p>{{date}}</p>
+        </div>
+        {{else}}
+        <p>No reserved tables yet!</p>
+        {{/each}}
+    </div>
+    
+</div>

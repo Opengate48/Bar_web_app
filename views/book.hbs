@@ -1,22 +1,102 @@
 <div class="grid-container">
+    {{#each tables}}
     <div class="card">
-        <img src="/images/book_table1.jpg" alt="Table 1">
-        <h3>Table 1</h3>
-        <button class="reserve-btn">$10</button>
+        <img src="/images/{{tablepic}}" alt="{{table}}">
+        <h3>{{table}}</h3>
+        <form>
+            <input type="hidden" name="table" value="{{table}}">
+            <button class="reserve-btn" type="button">Reserve for ${{price}}</button>
+        </form>
+        
     </div>
-    <div class="card">
-        <img src="/images/book_table2.jpg" alt="Table 2">
-        <h3>Table 2</h3>
-        <button class="reserve-btn">$10</button>
-    </div>
-    <div class="card">
-        <img src="/images/book_table3.jpg" alt="Table 3">
-        <h3>Table 3</h3>
-        <button class="reserve-btn">$10</button>
-    </div>
-    <div class="card">
-        <img src="/images/book_billiard.jpg" alt="Billiard table">
-        <h3>Billiard table</h3>
-        <button class="reserve-btn">$15</button>
+    {{/each}}
+</div>
+
+<div id="time-modal" class="modal hidden">
+    <div class="modal-content">
+        <button class="arrow-btn" id="prev-hour">◀</button>
+        <span id="selected-hour">18:00</span>
+        <button class="arrow-btn" id="next-hour">▶</button>
+        <form id="booking-form" method="POST" action="/book">
+            <input type="hidden" name="table" id="selected-table">
+            <input type="hidden" name="hour" id="selected-hour-input">
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("time-modal");
+    const selectedHourEl = document.getElementById("selected-hour");
+    const selectedHourInput = document.getElementById("selected-hour-input");
+    const selectedTableInput = document.getElementById("selected-table");
+    const form = document.getElementById("booking-form");
+
+    const hours = [
+        "18:00", "19:00", "20:00", "21:00", "22:00",
+        "23:00", "00:00", "01:00", "02:00"
+    ];
+    let currentHourIndex = 0;
+
+    // Открытие модального окна
+    document.querySelectorAll(".reserve-btn").forEach(button => {
+        button.addEventListener("click", (e) => {
+            e.preventDefault();
+            const table = e.target.closest("form").querySelector("input[name='table']").value;
+            selectedTableInput.value = table; // Устанавливаем имя стола
+            selectedHourEl.textContent = hours[currentHourIndex]; // Установить изначальное время
+            selectedHourInput.value = hours[currentHourIndex];
+            modal.classList.remove("hidden"); // Показываем модальное окно
+        });
+    });
+
+    // Переключение времени
+    document.getElementById("prev-hour").addEventListener("click", () => {
+        if (currentHourIndex > 0) currentHourIndex--;
+        selectedHourEl.textContent = hours[currentHourIndex];
+        selectedHourInput.value = hours[currentHourIndex];
+    });
+
+    document.getElementById("next-hour").addEventListener("click", () => {
+        if (currentHourIndex < hours.length - 1) currentHourIndex++;
+        selectedHourEl.textContent = hours[currentHourIndex];
+        selectedHourInput.value = hours[currentHourIndex];
+    });
+
+    // Закрытие модального окна при клике вне его
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.classList.add("hidden");
+        }
+    });
+
+    // Обработка отправки формы
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const table = formData.get("table");
+        const hour = formData.get("hour");
+        const csrfToken = "{{csrfToken}}";
+
+        try {
+            const response = await fetch('/book', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'CSRF-Token': csrfToken },
+                body: JSON.stringify({ table, hour })
+            });
+
+            const result = await response.text();
+            if (response.ok) {
+                modal.classList.add("hidden"); // Закрываем модальное окно
+            } else {
+                alert(result); // Сообщение об ошибке
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+});
+</script>
+

@@ -176,6 +176,67 @@ footer {
     background-color: #d9820d; /* Цвет при наведении */
 }
 
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(66, 66, 66, 0.7);;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Тень */
+    padding: 1em;
+    border-radius: 10px;
+    position: relative;
+}
+.arrow-btn {
+    background-color: #f39c12;
+    color: #ffffff;
+    font-size: 1.5em;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0.5em;
+    margin: 0 1em; /* Отступы для расположения стрелок по бокам */
+}
+.arrow-btn:hover {
+    background: #d9820d;
+}
+#selected-hour {
+    font-size: 1.5em;
+    margin: 0 1em;
+    color: #f39c12;
+}
+
+.submit-btn {
+    background-color: #f39c12;
+    color: #ffffff;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0.5em 1em;
+    margin: auto;
+}
+
+.submit-btn:hover {
+    background: #d9820d;
+}
+
 @media screen and (max-width: 768px) {
     .navbar-container {
         flex-direction: column;
