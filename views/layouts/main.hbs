@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - Comrades Bar</title>
+    <link rel="stylesheet" href="/styles/{{page}}_style.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">
+            </a>
+            <nav class="nav-links">
+                <ul>
+                    <li><a href="/book" class="{{#if (eq activePage 'book')}}active{{/if}}">Book a table</a></li>
+                    <li><a href="/menu" class="{{#if (eq activePage 'menu')}}active{{/if}}">Menu</a></li>
+                    <li><a href="/PAua" class="{{#if (eq activePage 'PAua')}}active{{/if}}"></a>Personal account</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="content">
+        <main>
+            {{{body}}}
+        </main>
+        <footer>
+            <p>work e-mail: VladimirGlebov@eyefind.info</p>
+            <p>phone number: 662-555-0147</p>
+        </footer>
+    </div>
+</body>
+
+</html>

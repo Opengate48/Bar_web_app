@@ -1,0 +1,152 @@
+/* Устанавливаем общий стиль для страницы */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* Фон */
+body {
+    background-image: url('../images/bg.jpg'); /* Замените на путь к вашему изображению */
+    background-size: cover;
+    background-attachment: fixed; /* Фиксируем фон */
+    background-position: center;
+    color: #ffffff; /* Цвет текста */
+    
+}
+
+
+.navbar {
+    box-sizing: border-box; 
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
+    padding: 0.5em;
+    padding-inline: 4em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.navbar-container {
+    max-width: 1200px; 
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Расстояние между ссылками */
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ffffff;
+    opacity: 0.5;
+    font-size: 1.1em;
+    transition: color 0.5s ease, opacity 0.3s ease;
+}
+
+.nav-links a:hover
+{
+    opacity: 1;
+    color: #f39c12; /* Изменение цвета при наведении */
+}
+
+.logo {
+    display: inline-block; /* Устанавливаем как блочный элемент для нажатия */
+    height: 3em;
+    width: 10em; 
+    background-image: url('../images/logo.jpg'); /* Путь к изображению */
+    background-size: contain; /* Масштабируем изображение, чтобы поместилось */
+    background-repeat: no-repeat; 
+    background-position: center; /* Центрируем изображение */
+    cursor: pointer; /* Указатель мыши при наведении */
+    opacity: 0.5;
+    transition: opacity 0.7s ease;
+}
+
+.logo:hover {
+    opacity: 0.8; /* Эффект при наведении */
+}
+
+/* Контейнер контента */
+.content {
+    background: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон для контента */
+    width: 50%;
+    max-width: 800px;
+    margin: 6em auto; /* Центрируем контент */
+    padding: 1.5em;
+    border-radius: 10px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+    
+}
+
+/* Стиль заголовка */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+/* Основной контент */
+main {
+    font-size: 0.7em;
+    line-height: 1.6;
+    text-align: justify;
+    /* max-height: 500px; /* Ограничиваем высоту для демонстрации скролла */
+    /* overflow-y: auto; /* Прокрутка при переполнении */
+}
+
+main img {
+    margin: 1.3em auto; /* Центрируем с отступами сверху и снизу */
+    width: 50%; /* Увеличиваем размер изображения на маленьких экранах */
+    display: block; 
+    border-radius: 10px;
+}
+main h3 {
+    color: #f39c12;
+}
+
+/* Подвал */
+footer {
+    text-align: center;
+    margin-top: 4em;
+    font-size: 0.7em;
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+    }
+
+    .nav-links ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+
+    .logo {
+        margin-bottom: 10px; /* Отступ между логотипом и навигацией */
+    }
+
+    .content {
+        width: 80%;
+        margin: 12em auto;
+    }
+
+   
+}
